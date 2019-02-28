@@ -88,12 +88,14 @@ end
 
 def get_average_age_for_season(data, season)
 	ages = []
+	age_total = 0
 	data.each do |season_key,contestant_info|
 		if season == season_key
 			contestant_info.each do |raw_data|
 				raw_data.each do |tag,value|
 					if tag=="age"
 						ages << value.to_i
+						age_total += value.to_f
 					else
 						nil
 					end
@@ -103,7 +105,7 @@ def get_average_age_for_season(data, season)
 			nil
 		end
 	end
-	ages_avg = ages.inject{ |sum, el| sum + el } / ages.size
-	ages_avg
+	age_avg = age_total / ages.size
+	age_avg.round(0)
 end
 
